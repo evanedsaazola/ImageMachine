@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">Image Machine</string>
+
+    <string name="text_date_dialog">%1d/%2d/%3d</string>
+    <string name="text_type">Type: %1s</string>
+    <string name="text_qr_code_num">QR Code Number: %1s</string>
+    <string name="text_date">Latest Maintenance Date: %1s</string>
+
+    <string name="text_main_1">Welcome to Image Machine</string>
+    <string name="text_main2">Please select the menu you want to go</string>
+
+    <string name="title_machine_data">Machine Data</string>
+    <string name="title_code_reader">Code Reader</string>
+
+    <string name="title_machine_id">Machine ID</string>
+    <string name="title_machine_name">Machine Name</string>
+    <string name="title_machine_type">Machine Type</string>
+    <string name="title_machine_qr_code">Machine QR Code Number</string>
+    <string name="title_machine_date">Latest Maintenance Date</string>
+    <string name="title_btn_add_machine_data">Add Machine Data</string>
+
+    <string name="title_machine_image">Machine Image</string>
+    <string name="title_btn_delete_machine_data">Delete Machine Data</string>
+
+    <string name="title_update_machine_data">Update Machine Data</string>
+    <string name="title_btn_update_machine_data">Update Machine Data</string>
 </resources>

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".MachineDataDetailActivity">
+    tools:context=".activities.MachineDataDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMachineDetail"
@@ -23,7 +24,8 @@
             android:layout_marginEnd="16dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingEnd="32dp">
+            android:paddingEnd="32dp"
+            tools:ignore="RtlSymmetry">
 
             <Button
                 android:id="@+id/btnBack"
@@ -37,9 +39,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/caviar_dreams_bold"
                 android:gravity="center_horizontal"
-                android:text="Machine Name"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                tools:text="Machine Name"/>
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
@@ -71,12 +73,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/caviar_dreams_bold"
-                android:text="Machine Name"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Machine Name"/>
 
             <TextView
                 android:id="@+id/tvMachineDetailId"
@@ -87,12 +89,12 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/caviar_dreams_italic"
                 android:gravity="center_horizontal"
-                android:text="Machine ID"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvMachineDetailName"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Machine ID"/>
 
             <TextView
                 android:id="@+id/tvMachineDetailType"
@@ -102,12 +104,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="160dp"
                 android:fontFamily="@font/caviar_dreams_regular"
-                android:text="Machine Type"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvMachineDetailName" />
+                app:layout_constraintTop_toBottomOf="@+id/tvMachineDetailName"
+                tools:text="Machine Type"/>
 
             <TextView
                 android:id="@+id/tvMachineDetailQrCodeNum"
@@ -117,12 +119,12 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="120dp"
                 android:fontFamily="@font/caviar_dreams_regular"
-                android:text="QR Code Number: 123456789"
                 android:textColor="@color/colorBlack"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvMachineDetailType" />
+                app:layout_constraintTop_toBottomOf="@+id/tvMachineDetailType"
+                tools:text="QR Code Number: 123456789"/>
 
             <TextView
                 android:id="@+id/tvMachineDetailMaintenanceDate"
@@ -132,12 +134,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/caviar_dreams_bold_italic"
-                android:text="Last Maintenance Date: 20/06/2020"
                 android:textColor="@color/colorBlack"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvMachineDetailQrCodeNum" />
+                app:layout_constraintTop_toBottomOf="@+id/tvMachineDetailQrCodeNum"
+                tools:text="Last Maintenance Date: 20/06/2020"/>
 
             <TextView
                 android:id="@+id/txtMachineDetail1"
@@ -147,7 +149,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/caviar_dreams_bold"
-                android:text="Machine Image"
+                android:text="@string/title_machine_image"
                 android:textColor="@color/colorBlack"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -175,7 +177,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/bg_button_2"
                 android:fontFamily="@font/caviar_dreams_bold"
-                android:text="Machine Image"
+                android:text="@string/title_machine_image"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp"
@@ -213,7 +215,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_button_3"
                 android:fontFamily="@font/caviar_dreams_bold"
-                android:text="Delete Machine Data"
+                android:text="@string/title_btn_delete_machine_data"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp"

@@ -1,4 +1,4 @@
-package io.prospace.submissions.imagemachine;
+package io.prospace.submissions.imagemachine.databases;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +14,7 @@ public class MachineImageDatabaseHelper extends SQLiteOpenHelper {
         super(context, name, factory, version);
     }
 
+    // Create a new SQLite database if there wasn't any database found
     public void queryData(String sql) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.execSQL(sql);

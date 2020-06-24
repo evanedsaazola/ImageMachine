@@ -1,4 +1,4 @@
-package io.prospace.submissions.imagemachine;
+package io.prospace.submissions.imagemachine.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,6 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+
+import io.prospace.submissions.imagemachine.interfaces.ImageClickCallback;
+import io.prospace.submissions.imagemachine.datamodel.MachineImageDataModel;
+import io.prospace.submissions.imagemachine.R;
 
 public class MachineImageAdapter extends RecyclerView.Adapter<MachineImageAdapter.MachineDetailViewHolder> {
 
@@ -86,6 +90,10 @@ public class MachineImageAdapter extends RecyclerView.Adapter<MachineImageAdapte
 
     @Override
     public int getItemCount() {
+        /*
+        Limit the size of DataModel into 10. If it above 10, then only item below 10 that will be
+        displayed
+         */
         return Math.min(machineDataDetailModels.size(), IMAGE_LIMIT);
     }
 

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center">
@@ -31,9 +32,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/caviar_dreams_bold"
-                android:text="Machine Name"
                 android:textColor="@color/colorBlack"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:text="Machine Name"/>
 
             <TextView
                 android:id="@+id/textMachineType"
@@ -44,9 +45,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/caviar_dreams_regular"
-                android:text="Machine Type"
                 android:textColor="@color/colorBlack"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="Machine Type"/>
 
             <TextView
                 android:id="@+id/textMachineMaintenanceDate"
@@ -58,11 +59,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/caviar_dreams_italic"
-                android:text="Machine Maintenance Date"
                 android:textColor="@color/colorBlack"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:text="Machine Maintenance Date"/>
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

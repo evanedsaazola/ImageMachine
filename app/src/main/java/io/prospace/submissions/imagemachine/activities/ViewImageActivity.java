@@ -1,4 +1,4 @@
-package io.prospace.submissions.imagemachine;
+package io.prospace.submissions.imagemachine.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+
+import io.prospace.submissions.imagemachine.R;
 
 public class ViewImageActivity extends AppCompatActivity {
 
@@ -19,6 +21,8 @@ public class ViewImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_image);
 
         ImageView iv_view_image = findViewById(R.id.ivViewImage);
+
+        // Retrieve image byte from another activity and display the image.
         byte[] images = getIntent().getByteArrayExtra(VIEW_IMAGE_EXTRA);
 
         assert images != null;

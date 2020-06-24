@@ -14,25 +14,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewImageActivity"></activity>
+        <activity android:name=".activities.ViewImageActivity"></activity>
 
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
 
-        <activity android:name=".UpdateMachineDataActivity" />
-        <activity android:name=".MachineDataDetailActivity" />
-        <activity android:name=".AddMachineDataActivity" />
-        <activity android:name=".CodeReaderActivity" />
-        <activity android:name=".MachineDataActivity" />
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name=".activities.UpdateMachineDataActivity" />
+        <activity android:name=".activities.MachineDataDetailActivity" />
+        <activity android:name=".activities.AddMachineDataActivity" />
+        <activity android:name=".activities.CodeReaderActivity" />
+        <activity android:name=".activities.MachineDataActivity" />
+        <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activities.MainActivity" />
     </application>
 
 </manifest>

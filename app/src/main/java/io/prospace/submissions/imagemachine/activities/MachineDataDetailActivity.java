@@ -1,4 +1,4 @@
-package io.prospace.submissions.imagemachine;
+package io.prospace.submissions.imagemachine.activities;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +33,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import io.prospace.submissions.imagemachine.R;
+import io.prospace.submissions.imagemachine.adapter.MachineImageAdapter;
+import io.prospace.submissions.imagemachine.databases.MachineDatabase;
+import io.prospace.submissions.imagemachine.databases.MachineImageDatabaseHelper;
+import io.prospace.submissions.imagemachine.datamodel.MachineDataModel;
+import io.prospace.submissions.imagemachine.datamodel.MachineImageDataModel;
+import io.prospace.submissions.imagemachine.interfaces.ImageClickCallback;
 
 public class MachineDataDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -76,6 +84,10 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
         btn_back.setOnClickListener(this);
         fab_delete_images.setOnClickListener(this);
 
+        /*
+        Retrieve the parameter that needed to show the data, is it from ID or from QR Code and
+        show the data based on the retrieved parameter.
+         */
         machineId = getIntent().getStringExtra(MACHINE_ID_EXTRA);
         machineQrCode = getIntent().getStringExtra(MACHINE_QR_CODE_EXTRA);
         initializeDatabase();
@@ -86,11 +98,13 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
             showDataFromQrCode();
         }
 
+        // Create SQLite Database for machine images
         machineImageDatabaseHelper = new MachineImageDatabaseHelper
                 (this, "IMAGESDB.sqlite", null, 1);
         machineImageDatabaseHelper.queryData
                 ("CREATE TABLE IF NOT EXISTS IMAGES(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, image BLOB)");
 
+        // Get the images if there are images stored in certain item.
         Cursor cursor = getData();
         machineImageArrayList.clear();
         while (cursor.moveToNext()) {
@@ -123,9 +137,9 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
             tv_toolbar_title.setText(machineDataArrayList.get(position).getMachineName());
             tv_detail_id.setText(machineDataArrayList.get(position).getMachineId());
             tv_detail_name.setText(machineDataArrayList.get(position).getMachineName());
-            tv_detail_type.setText("Type: " + machineDataArrayList.get(position).getMachineType());
-            tv_detail_qr_code.setText("QR Code Number: " + machineDataArrayList.get(position).getMachineQrCodeNum());
-            tv_detail_date.setText("Latest Maintenance Date: " + machineDataArrayList.get(position).getMachineDate());
+            tv_detail_type.setText(getString(R.string.text_type, machineDataArrayList.get(position).getMachineType()));
+            tv_detail_qr_code.setText(getString(R.string.text_qr_code_num, machineDataArrayList.get(position).getMachineQrCodeNum()));
+            tv_detail_date.setText(getString(R.string.text_date, machineDataArrayList.get(position).getMachineDate()));
         }
     }
 
@@ -136,9 +150,9 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
             tv_toolbar_title.setText(machineDataArrayList.get(position).getMachineName());
             tv_detail_id.setText(machineDataArrayList.get(position).getMachineId());
             tv_detail_name.setText(machineDataArrayList.get(position).getMachineName());
-            tv_detail_type.setText("Type: " + machineDataArrayList.get(position).getMachineType());
-            tv_detail_qr_code.setText("QR Code Number: " + machineDataArrayList.get(position).getMachineQrCodeNum());
-            tv_detail_date.setText("Latest Maintenance Date: " + machineDataArrayList.get(position).getMachineDate());
+            tv_detail_type.setText(getString(R.string.text_type, machineDataArrayList.get(position).getMachineType()));
+            tv_detail_qr_code.setText(getString(R.string.text_qr_code_num, machineDataArrayList.get(position).getMachineQrCodeNum()));
+            tv_detail_date.setText(getString(R.string.text_date, machineDataArrayList.get(position).getMachineDate()));
         }
     }
 
@@ -147,6 +161,7 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
 
         switch (view.getId()) {
 
+            // Check the permission from the user to access phone storage.
             case R.id.btnMachineDetailAddImage:
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
@@ -189,6 +204,9 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && resultCode == RESULT_OK) {
+            /*
+            Check if the inputted images is smaller than 10. If it does, then it will cancel the image retrieve.
+             */
             ClipData clipData = Objects.requireNonNull(data).getClipData();
             if (clipData != null) {
                 if (clipData.getItemCount() > 10) {
@@ -196,6 +214,7 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
                     Intent test = new Intent();
                     setResult(Activity.RESULT_CANCELED, test);
                 }
+                // Convert image from gallery and decode it to bitmap and convert it again into byte.
                 else {
                     for (int i = 0; i < clipData.getItemCount(); i++) {
                         Uri imageUri = clipData.getItemAt(i).getUri();
@@ -230,6 +249,7 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
                 }
             }
 
+            // Get the images if there are images stored and display it into recyclerview.
             Cursor cursor = getData();
             machineImageArrayList.clear();
             while (cursor.moveToNext()) {
@@ -254,6 +274,7 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
         return byteArrayOutputStream.toByteArray();
     }
 
+    // SQLite query to read the database data based on machine name.
     private Cursor getData() {
         SQLiteDatabase sqLiteDatabase = machineImageDatabaseHelper.getReadableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM IMAGES WHERE name = ?", new String[]{tv_detail_name.getText().toString()});
@@ -282,6 +303,7 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
 //        machineImageAdapter.notifyDataSetChanged();
 //    }
 
+    // Get image byte and send it to another activity to be viewed fullscreen
     private ImageClickCallback imageClickCallback = new ImageClickCallback() {
         @Override
         public void onClickImage(MachineImageDataModel machineImageDataModel) {

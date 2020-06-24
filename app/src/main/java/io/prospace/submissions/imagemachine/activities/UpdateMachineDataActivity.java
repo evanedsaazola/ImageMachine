@@ -1,4 +1,4 @@
-package io.prospace.submissions.imagemachine;
+package io.prospace.submissions.imagemachine.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -15,6 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+
+import io.prospace.submissions.imagemachine.R;
+import io.prospace.submissions.imagemachine.databases.MachineDatabase;
+import io.prospace.submissions.imagemachine.datamodel.MachineDataModel;
+import io.prospace.submissions.imagemachine.interfaces.MachineEditListener;
 
 public class UpdateMachineDataActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -71,6 +76,7 @@ public class UpdateMachineDataActivity extends AppCompatActivity implements View
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnBack:
+                finish();
                 break;
 
             case R.id.tvUpdateDate:
@@ -82,7 +88,7 @@ public class UpdateMachineDataActivity extends AppCompatActivity implements View
                 DatePickerDialog dateUpdateDialog = new DatePickerDialog(UpdateMachineDataActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                        tv_update_date.setText(dayOfMonth + "/" + monthOfYear + "/" + year);
+                        tv_update_date.setText(getString(R.string.text_date_dialog, dayOfMonth, monthOfYear, year));
                     }
                 }, year, month, day);
 
@@ -91,11 +97,18 @@ public class UpdateMachineDataActivity extends AppCompatActivity implements View
                 break;
 
             case R.id.btnUpdateData:
+                /*
+                 Check all of data input views. If there is one input views empty, Toast will be shown.
+
+                 If there isn;t any input view that is empty, the DB will update the data with the help of update DAO
+                 and send it to another activity to be shown.
+                 */
                 if (et_update_id.getText().toString().isEmpty() || et_update_name.getText().toString().isEmpty() ||
                         et_update_type.getText().toString().isEmpty() || et_update_qr_code.getText().toString().isEmpty() ||
                         tv_update_date == null) {
                     Toast.makeText(this, "Please input your data correctly!", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else {
                     String updateTextId = et_update_id.getText().toString().trim();
                     String updateTextName = et_update_name.getText().toString().trim();
                     String updateTextType = et_update_type.getText().toString().trim();

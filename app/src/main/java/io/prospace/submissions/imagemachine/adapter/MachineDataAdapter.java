@@ -1,4 +1,4 @@
-package io.prospace.submissions.imagemachine;
+package io.prospace.submissions.imagemachine.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import io.prospace.submissions.imagemachine.interfaces.MachineClickCallback;
+import io.prospace.submissions.imagemachine.datamodel.MachineDataModel;
+import io.prospace.submissions.imagemachine.interfaces.MachineEditListener;
+import io.prospace.submissions.imagemachine.R;
+import io.prospace.submissions.imagemachine.activities.UpdateMachineDataActivity;
 
 public class MachineDataAdapter extends RecyclerView.Adapter<MachineDataAdapter.MachineViewHolder> implements MachineEditListener {
 
@@ -51,6 +57,7 @@ public class MachineDataAdapter extends RecyclerView.Adapter<MachineDataAdapter.
             }
         });
 
+        // Update item data and send the item ID data and item position to another activity.
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {

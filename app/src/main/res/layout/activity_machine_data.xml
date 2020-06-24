@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".MachineDataActivity">
+    tools:context=".activities.MachineDataActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMachineData"
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/caviar_dreams_bold"
                 android:gravity="center_horizontal"
-                android:text="Machine Data"
+                android:text="@string/title_machine_data"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"/>
         </LinearLayout>
@@ -74,7 +74,7 @@
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/bg_button_2"
                 android:fontFamily="@font/caviar_dreams_bold"
-                android:text="Add Machine Data"
+                android:text="@string/title_btn_add_machine_data"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp" />

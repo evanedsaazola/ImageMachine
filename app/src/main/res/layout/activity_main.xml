@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <TextView
         android:id="@+id/txtMain1"
@@ -17,7 +17,7 @@
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/caviar_dreams_bold"
         android:gravity="center_horizontal"
-        android:text="Welcome to Image Machine"
+        android:text="@string/text_main_1"
         android:textColor="@color/colorWhite"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/caviar_dreams_regular"
-        android:text="Please select the menu you want to go"
+        android:text="@string/text_main2"
         android:textColor="@color/colorWhite"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
             android:fontFamily="@font/caviar_dreams_regular"
             android:paddingStart="60dp"
             android:paddingEnd="60dp"
-            android:text="Machine Data"
+            android:text="@string/title_machine_data"
             android:textAllCaps="false"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
             android:fontFamily="@font/caviar_dreams_regular"
             android:paddingStart="60dp"
             android:paddingEnd="60dp"
-            android:text="Code Reader"
+            android:text="@string/title_code_reader"
             android:textAllCaps="false"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"

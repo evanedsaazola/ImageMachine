@@ -1,4 +1,4 @@
-package io.prospace.submissions.imagemachine;
+package io.prospace.submissions.imagemachine.datamodel;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

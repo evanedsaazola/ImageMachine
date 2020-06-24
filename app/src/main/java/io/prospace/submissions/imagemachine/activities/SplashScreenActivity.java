@@ -1,10 +1,12 @@
-package io.prospace.submissions.imagemachine;
+package io.prospace.submissions.imagemachine.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import io.prospace.submissions.imagemachine.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

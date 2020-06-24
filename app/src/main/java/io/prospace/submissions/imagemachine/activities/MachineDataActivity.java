@@ -1,4 +1,4 @@
-package io.prospace.submissions.imagemachine;
+package io.prospace.submissions.imagemachine.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import io.prospace.submissions.imagemachine.R;
+import io.prospace.submissions.imagemachine.adapter.MachineDataAdapter;
+import io.prospace.submissions.imagemachine.databases.MachineDatabase;
+import io.prospace.submissions.imagemachine.datamodel.MachineDataModel;
+import io.prospace.submissions.imagemachine.interfaces.MachineClickCallback;
 
 public class MachineDataActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -43,6 +49,7 @@ public class MachineDataActivity extends AppCompatActivity implements View.OnCli
         showData();
     }
 
+    // Initialize MachineDatabase and build the database.
     private void initializeDatabase() {
         MachineDatabase machineDatabase = Room.databaseBuilder(this, MachineDatabase.class, "machinesdb")
                 .allowMainThreadQueries()
@@ -58,6 +65,7 @@ public class MachineDataActivity extends AppCompatActivity implements View.OnCli
         rv_machine_list.setAdapter(machineAdapter);
     }
 
+    // Send machine ID that retrieved from DataModel
     private MachineClickCallback machineClickCallback = new MachineClickCallback() {
         @Override
         public void onClick(MachineDataModel machineDataModel) {

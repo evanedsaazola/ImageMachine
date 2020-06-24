@@ -1,4 +1,4 @@
-package io.prospace.submissions.imagemachine;
+package io.prospace.submissions.imagemachine.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -16,6 +16,10 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Random;
+
+import io.prospace.submissions.imagemachine.R;
+import io.prospace.submissions.imagemachine.databases.MachineDatabase;
+import io.prospace.submissions.imagemachine.datamodel.MachineDataModel;
 
 public class AddMachineDataActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -51,6 +55,9 @@ public class AddMachineDataActivity extends AppCompatActivity implements View.On
         btn_back = findViewById(R.id.btnBack);
     }
 
+    /*
+     Generate random text that will be used as ID for the machine.
+     */
     public static String generateMachineId(int idLength) {
         final String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder idResult = new StringBuilder();
@@ -82,10 +89,11 @@ public class AddMachineDataActivity extends AppCompatActivity implements View.On
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
 
-                DatePickerDialog dateDialog = new DatePickerDialog(AddMachineDataActivity.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog dateDialog = new DatePickerDialog(AddMachineDataActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                        tv_add_date.setText(dayOfMonth + "/" + monthOfYear + "/" + year);
+                        tv_add_date.setText(getString(R.string.text_date_dialog, dayOfMonth, monthOfYear, year));
                     }
                 }, year, month, day);
 
@@ -94,6 +102,12 @@ public class AddMachineDataActivity extends AppCompatActivity implements View.On
                 break;
 
             case R.id.btnAddData:
+                /*
+                 Check all of data input views. If there is one input views empty, Toast will be shown.
+
+                 If there isn;t any input view that is empty, the DB will insert the data with the help of insert DAO
+                 and send it to another activity to be shown.
+                 */
                 if (et_add_id.getText().toString().isEmpty() || et_add_name.getText().toString().isEmpty() ||
                         et_add_type.getText().toString().isEmpty() || et_add_qr_code.getText().toString().isEmpty() ||
                         tv_add_date == null) {
@@ -114,6 +128,8 @@ public class AddMachineDataActivity extends AppCompatActivity implements View.On
                     Log.d("TAG", "" + machineModel);
                 }
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + view.getId());
         }
     }
 }

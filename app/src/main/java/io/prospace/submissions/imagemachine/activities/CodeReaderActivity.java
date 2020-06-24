@@ -1,4 +1,4 @@
-package io.prospace.submissions.imagemachine;
+package io.prospace.submissions.imagemachine.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +23,8 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 import java.io.IOException;
 import java.util.Objects;
 
+import io.prospace.submissions.imagemachine.R;
+
 public class CodeReaderActivity extends AppCompatActivity {
 
     private SurfaceView view_camera;
@@ -38,13 +40,20 @@ public class CodeReaderActivity extends AppCompatActivity {
 
         view_camera = findViewById(R.id.viewCodeReaderCamera);
 
+        // Initialize barcode detector and set to only scan QR Code formats.
         barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.QR_CODE)
                 .build();
+
+        // Initialize camera source and set the size of camera preview.
         cameraSource = new CameraSource.Builder(this, barcodeDetector)
                 .setRequestedPreviewSize(640, 480)
                 .build();
 
+        /*
+        Providing access to surface view and check if the user has given the permission for the app
+        to access the camera.
+         */
         view_camera.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
@@ -78,6 +87,10 @@ public class CodeReaderActivity extends AppCompatActivity {
 
             }
 
+            /*
+            Check if there is QR code detected. If it does, then it will send the value stored inside
+            QR code to another activity.
+             */
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> qrCode = detections.getDetectedItems();
@@ -97,6 +110,9 @@ public class CodeReaderActivity extends AppCompatActivity {
 
     }
 
+    /*
+    Check if the user has given the permission for the app to access the camera.
+    */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == requestCameraPermissionId) {
