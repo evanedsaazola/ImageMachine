@@ -93,7 +93,7 @@ public class AddMachineDataActivity extends AppCompatActivity implements View.On
                         new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                        tv_add_date.setText(getString(R.string.text_date_dialog, dayOfMonth, monthOfYear, year));
+                        tv_add_date.setText(getString(R.string.text_date_dialog, dayOfMonth, monthOfYear+1, year));
                     }
                 }, year, month, day);
 

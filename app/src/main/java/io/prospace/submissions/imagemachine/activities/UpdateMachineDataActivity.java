@@ -88,7 +88,7 @@ public class UpdateMachineDataActivity extends AppCompatActivity implements View
                 DatePickerDialog dateUpdateDialog = new DatePickerDialog(UpdateMachineDataActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                        tv_update_date.setText(getString(R.string.text_date_dialog, dayOfMonth, monthOfYear, year));
+                        tv_update_date.setText(getString(R.string.text_date_dialog, dayOfMonth, monthOfYear+1, year));
                     }
                 }, year, month, day);
 
