@@ -3,6 +3,7 @@
 ***Image Machine*** is an Android Application that helps grouping images from photo gallery and also easily access the image data.
 
 
+
 ## **Features**
 
 In Image Machine, you can:
@@ -29,7 +30,7 @@ In this project, I used these libraries:
 
 #### **MainActivity**
 
-<img src="D:\Self Development Files\Works\Prospace\Prospace UI Components\Image Machine - UI Screen\For README\MainActivity.png" alt="MainActivity" style="zoom: 25%;" />
+![](https://drive.google.com/file/d/1ghFI318QHqEC0a1wEAs6atW7ViTFgCpJ/view?usp=sharing)
 
 Explanation:
 
@@ -41,7 +42,7 @@ Explanation:
 
 **MachineDataActivity**
 
-<img src="D:\Self Development Files\Works\Prospace\Prospace UI Components\Image Machine - UI Screen\For README\MachineDataActivity.png" alt="MachineDataActivity" style="zoom: 25%;" />
+![](https://drive.google.com/file/d/13N02UdIKntUc-lb0aXwlQEwpR2dmRejN/view?usp=sharing)
 
 Explanation:
 
@@ -55,7 +56,7 @@ Explanation:
 
 5 &#8594; Sort Menu &#8594; Display the options to sort item by name or by type.
 
-<img src="D:\Self Development Files\Works\Prospace\Prospace UI Components\Image Machine - UI Screen\For README\MachineDataActivityWithMenu.png" alt="MachineDataActivityWithMenu" style="zoom: 25%;" />
+![](https://drive.google.com/file/d/1HI6GylqK1v-ZjrJlW8PZ0ydQ20NDSJM1/view?usp=sharing)
 
 Explanation:
 
@@ -67,7 +68,7 @@ Explanation:
 
 **AddMachineDataActivity**
 
-<img src="D:\Self Development Files\Works\Prospace\Prospace UI Components\Image Machine - UI Screen\For README\AddMachineDataActivity.png" alt="AddMachineDataActivity" style="zoom:25%;" />
+![](https://drive.google.com/file/d/1rBN1FBuhNMk_kvzpRrJcpUoNIY0ajYMC/view?usp=sharing)
 
 Explanation:
 
@@ -89,7 +90,7 @@ Explanation:
 
 **UpdateMachineDataActivity**
 
-<img src="D:\Self Development Files\Works\Prospace\Prospace UI Components\Image Machine - UI Screen\For README\UpdateMachineDataActivity.png" alt="UpdateMachineDataActivity" style="zoom:25%;" />
+![](https://drive.google.com/file/d/10IrpnWZwKZKbowFAO-ZPwH2dNaa4IES4/view?usp=sharing)
 
 Explanation:
 
@@ -111,7 +112,7 @@ Explanation:
 
 **MachineDataDetailActivity**
 
-<img src="D:\Self Development Files\Works\Prospace\Prospace UI Components\Image Machine - UI Screen\For README\MachineDataDetailActivity.png" alt="MachineDataDetailActivity" style="zoom:25%;" />
+![](https://drive.google.com/file/d/1SbhIXRAE1QR-THcElep6HhMus0fYssHw/view?usp=sharing)
 
 Explanation:
 
@@ -133,7 +134,7 @@ Explanation:
 
 9 &#8594; Back Button &#8594; Direct user to previous activity.
 
-<img src="D:\Self Development Files\Works\Prospace\Prospace UI Components\Image Machine - UI Screen\For README\MachineDataDetailActivityWithImages.png" alt="MachineDataDetailActivityWithImages" style="zoom:25%;" />
+![](https://drive.google.com/file/d/1QAtxss7B7IS1tJW8ugTI9Zi3XlTACumd/view?usp=sharing)
 
 Explanation:
 
@@ -143,7 +144,7 @@ Explanation:
 
 **ViewImageActivity**
 
-<img src="D:\Self Development Files\Works\Prospace\Prospace UI Components\Image Machine - UI Screen\For README\ViewImageActivity.png" alt="ViewImageActivity" style="zoom:25%;" />
+![](https://drive.google.com/file/d/1Ba3hlu_IYC-8jOYeGd-EKvS_YO5QjQE6/view?usp=sharing)
 
 Explanation:
 
@@ -153,7 +154,7 @@ Explanation:
 
 **CodeReaderActivity**
 
-<img src="D:\Self Development Files\Works\Prospace\Prospace UI Components\Image Machine - UI Screen\For README\CodeReaderActivity.png" alt="CodeReaderActivity" style="zoom:25%;" />
+![](https://drive.google.com/file/d/1iwr1_wP-iiIAFURqRAmXtM1ajwpisy8m/view?usp=sharing)
 
 Explanation:
 
