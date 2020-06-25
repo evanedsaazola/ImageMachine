@@ -30,7 +30,7 @@ In this project, I used these libraries:
 
 #### **MainActivity**
 
-![](https://drive.google.com/file/d/1ghFI318QHqEC0a1wEAs6atW7ViTFgCpJ/view?usp=sharing)
+[MainActivity](https://drive.google.com/file/d/1ghFI318QHqEC0a1wEAs6atW7ViTFgCpJ/view?usp=sharing)
 
 Explanation:
 
@@ -42,7 +42,7 @@ Explanation:
 
 **MachineDataActivity**
 
-![](https://drive.google.com/file/d/13N02UdIKntUc-lb0aXwlQEwpR2dmRejN/view?usp=sharing)
+[MachineDataActivity](https://drive.google.com/file/d/13N02UdIKntUc-lb0aXwlQEwpR2dmRejN/view?usp=sharing)
 
 Explanation:
 
@@ -56,7 +56,7 @@ Explanation:
 
 5 &#8594; Sort Menu &#8594; Display the options to sort item by name or by type.
 
-![](https://drive.google.com/file/d/1HI6GylqK1v-ZjrJlW8PZ0ydQ20NDSJM1/view?usp=sharing)
+[MachineDataActivityWithMenu](https://drive.google.com/file/d/1HI6GylqK1v-ZjrJlW8PZ0ydQ20NDSJM1/view?usp=sharing)
 
 Explanation:
 
@@ -68,7 +68,7 @@ Explanation:
 
 **AddMachineDataActivity**
 
-![](https://drive.google.com/file/d/1rBN1FBuhNMk_kvzpRrJcpUoNIY0ajYMC/view?usp=sharing)
+[AddMachineDataActivity](https://drive.google.com/file/d/1rBN1FBuhNMk_kvzpRrJcpUoNIY0ajYMC/view?usp=sharing)
 
 Explanation:
 
@@ -90,7 +90,7 @@ Explanation:
 
 **UpdateMachineDataActivity**
 
-![](https://drive.google.com/file/d/10IrpnWZwKZKbowFAO-ZPwH2dNaa4IES4/view?usp=sharing)
+[UpdateMachineDataActivity](https://drive.google.com/file/d/10IrpnWZwKZKbowFAO-ZPwH2dNaa4IES4/view?usp=sharing)
 
 Explanation:
 
@@ -112,7 +112,7 @@ Explanation:
 
 **MachineDataDetailActivity**
 
-![](https://drive.google.com/file/d/1SbhIXRAE1QR-THcElep6HhMus0fYssHw/view?usp=sharing)
+[MachineDataDetailActivity](https://drive.google.com/file/d/1SbhIXRAE1QR-THcElep6HhMus0fYssHw/view?usp=sharing)
 
 Explanation:
 
@@ -134,7 +134,7 @@ Explanation:
 
 9 &#8594; Back Button &#8594; Direct user to previous activity.
 
-![](https://drive.google.com/file/d/1QAtxss7B7IS1tJW8ugTI9Zi3XlTACumd/view?usp=sharing)
+[MachineDataDetailActivityWithImages](https://drive.google.com/file/d/1QAtxss7B7IS1tJW8ugTI9Zi3XlTACumd/view?usp=sharing)
 
 Explanation:
 
@@ -144,7 +144,7 @@ Explanation:
 
 **ViewImageActivity**
 
-![](https://drive.google.com/file/d/1Ba3hlu_IYC-8jOYeGd-EKvS_YO5QjQE6/view?usp=sharing)
+[ViewImageActivity](https://drive.google.com/file/d/1QAtxss7B7IS1tJW8ugTI9Zi3XlTACumd/view?usp=sharing)
 
 Explanation:
 
@@ -154,7 +154,7 @@ Explanation:
 
 **CodeReaderActivity**
 
-![](https://drive.google.com/file/d/1iwr1_wP-iiIAFURqRAmXtM1ajwpisy8m/view?usp=sharing)
+[CodeReaderActivity](https://drive.google.com/file/d/1iwr1_wP-iiIAFURqRAmXtM1ajwpisy8m/view?usp=sharing)
 
 Explanation:
 
