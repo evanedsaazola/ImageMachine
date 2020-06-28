@@ -165,7 +165,8 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
 
         switch (view.getId()) {
 
-            // Check the permission from the user to access phone storage and direct user to storage.
+            // Check the permission from the user to access phone storage and direct user
+            // to storage to select multiple images.
             case R.id.btnMachineDetailAddImage:
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
