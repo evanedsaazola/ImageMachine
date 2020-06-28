@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_button_1">
+
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_warning"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/caviar_dreams_bold"
+        android:gravity="center"
+        android:text="@string/dialog_delete_title_text"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/caviar_dreams_regular"
+        android:gravity="center"
+        android:text="@string/dialog_delete_body_text"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btnDialogDeleteCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_2"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="32dp"
+            android:padding="8dp"
+            android:text="@string/dialog_delete_cancel_button_text"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            style="?attr/buttonBarButtonStyle"/>
+
+        <Button
+            android:id="@+id/btnDialogDeleteConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_3"
+            android:fontFamily="@font/caviar_dreams_bold"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="10dp"
+            android:padding="8dp"
+            android:text="@string/dialog_delete_confirm_button_text"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            style="?attr/buttonBarButtonStyle"/>
+
+    </LinearLayout>
+
+</LinearLayout>

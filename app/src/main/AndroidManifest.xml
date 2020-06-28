@@ -23,7 +23,9 @@
         <activity android:name=".activities.UpdateMachineDataActivity" />
         <activity android:name=".activities.MachineDataDetailActivity" />
         <activity android:name=".activities.AddMachineDataActivity" />
-        <activity android:name=".activities.CodeReaderActivity" />
+        <activity
+            android:name=".activities.CodeReaderActivity"
+            android:noHistory="true"/>
         <activity android:name=".activities.MachineDataActivity" />
         <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>

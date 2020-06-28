@@ -97,7 +97,7 @@ public class CodeReaderActivity extends AppCompatActivity {
                 if (qrCode.size() != 0) {
                     barcodeDetector.release();
                     Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-                    Objects.requireNonNull(vibrator).vibrate(1000);
+                    Objects.requireNonNull(vibrator).vibrate(500);
                     String qrCodeValueText = qrCode.valueAt(0).displayValue;
                     Log.d("DataCheck", "Check QR Code Result >> " + qrCodeValueText);
 

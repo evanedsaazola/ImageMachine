@@ -88,13 +88,13 @@ public class MachineDataActivity extends AppCompatActivity implements View.OnCli
         switch (item.getItemId()) {
 
             case R.id.action_sort_by_name:
-                Toast.makeText(this, "List sort by name", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "List sorted by name", Toast.LENGTH_SHORT).show();
                 Collections.sort(machineDataArrayList, MachineDataModel.sortByName);
                 machineAdapter.notifyDataSetChanged();
                 break;
 
             case R.id.action_sort_by_type:
-                Toast.makeText(this, "List sort by type", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "List sorted by type", Toast.LENGTH_SHORT).show();
                 Collections.sort(machineDataArrayList, MachineDataModel.sortByType);
                 machineAdapter.notifyDataSetChanged();
                 break;

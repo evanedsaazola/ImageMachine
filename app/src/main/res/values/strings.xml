@@ -24,4 +24,18 @@
 
     <string name="title_update_machine_data">Update Machine Data</string>
     <string name="title_btn_update_machine_data">Update Machine Data</string>
+
+    <string name="text_maintenance_date">Maintenance Date</string>
+
+    <string name="dialog_warning_title_text">Input data incomplete!</string>
+    <string name="dialog_warning_body_text">Please input your data completely to be able to add the data.</string>
+
+    <string name="dialog_input_success_title_text">Input data complete!</string>
+    <string name="dialog_input_success_body_text">Your data have been inputted correctly. Please wait a moment while we redirect you to the data list page.</string>
+
+    <string name="dialog_delete_title_text">Delete data?</string>
+    <string name="dialog_delete_body_text">You\'ll lose the data and it will not be able to be recovered.</string>
+    <string name="dialog_delete_cancel_button_text">Cancel</string>
+    <string name="dialog_delete_confirm_button_text">Delete</string>
+
 </resources>

@@ -4,17 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.Random;
 
 import io.prospace.submissions.imagemachine.R;
@@ -103,15 +106,23 @@ public class AddMachineDataActivity extends AppCompatActivity implements View.On
 
             case R.id.btnAddData:
                 /*
-                 Check all of data input views. If there is one input views empty, Toast will be shown.
+                 Check all of data input views. If there is one input views empty, a dialog will be shown.
 
-                 If there isn;t any input view that is empty, the DB will insert the data with the help of insert DAO
+                 If there isn't any input view that is empty, the DB will insert the data with the help of insert DAO
                  and send it to another activity to be shown.
                  */
                 if (et_add_id.getText().toString().isEmpty() || et_add_name.getText().toString().isEmpty() ||
                         et_add_type.getText().toString().isEmpty() || et_add_qr_code.getText().toString().isEmpty() ||
                         tv_add_date == null) {
-                    Toast.makeText(this, "Please input your data correctly!", Toast.LENGTH_SHORT).show();
+                    final Dialog dialogInputWarning = new Dialog(AddMachineDataActivity.this);
+                    dialogInputWarning.setContentView(R.layout.dialog_input_warning);
+
+                    dialogInputWarning.setCancelable(true);
+                    dialogInputWarning.setCanceledOnTouchOutside(true);
+                    Objects.requireNonNull(dialogInputWarning.getWindow())
+                            .setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialogInputWarning.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                    dialogInputWarning.show();
                 }
                 else {
                     String textId = et_add_id.getText().toString().trim();
@@ -121,11 +132,31 @@ public class AddMachineDataActivity extends AppCompatActivity implements View.On
                     String textDate = tv_add_date.getText().toString();
 
                     MachineDataModel machineModel = new MachineDataModel(textId, textName, textType, textQrCode, textDate);
-
                     machineDatabase.machineDao().insertMachineData(machineModel);
-                    Toast.makeText(this, "Your data have been inputted!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(AddMachineDataActivity.this, MachineDataActivity.class));
-                    Log.d("TAG", "" + machineModel);
+
+                    final Dialog dialogInputSuccess = new Dialog(AddMachineDataActivity.this);
+
+                    if (!isFinishing()) {
+                        dialogInputSuccess.setContentView(R.layout.dialog_success);
+
+                        dialogInputSuccess.setCancelable(false);
+                        dialogInputSuccess.setCanceledOnTouchOutside(false);
+                        Objects.requireNonNull(dialogInputSuccess.getWindow())
+                                .setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        dialogInputSuccess.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                        dialogInputSuccess.show();
+
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(new Intent(AddMachineDataActivity.this, MachineDataActivity.class));
+                            }
+                        }, 2000);
+                    }
+                    else if (isFinishing()) {
+                        dialogInputSuccess.dismiss();
+                    }
                 }
                 break;
             default:

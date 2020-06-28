@@ -9,6 +9,7 @@ import androidx.room.Room;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,8 +17,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -161,7 +165,7 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
 
         switch (view.getId()) {
 
-            // Check the permission from the user to access phone storage.
+            // Check the permission from the user to access phone storage and direct user to storage.
             case R.id.btnMachineDetailAddImage:
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
@@ -176,10 +180,50 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
                 startActivityForResult(intentSelectImages, 1);
                 break;
 
+            /*
+            Display a dialog to confirm the user, is he/she want to delete the data.
+             */
             case R.id.btnMachineDetailDeleteData:
-                machineDatabase.machineDao().deleteMachineDataById(tv_detail_id.getText().toString());
-                startActivity(new Intent(MachineDataDetailActivity.this, MachineDataActivity.class));
-                Toast.makeText(this, "Your data have been deleted!", Toast.LENGTH_SHORT).show();
+                final Dialog dialogDeleteWarning = new Dialog(MachineDataDetailActivity.this);
+
+                if (!isFinishing()) {
+                    dialogDeleteWarning.setContentView(R.layout.dialog_delete_data_warning);
+
+                    Button btnCancelDelete = dialogDeleteWarning.findViewById(R.id.btnDialogDeleteCancel);
+                    Button btnConfirmDelete = dialogDeleteWarning.findViewById(R.id.btnDialogDeleteConfirm);
+
+                    btnCancelDelete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialogDeleteWarning.dismiss();
+                        }
+                    });
+
+                    btnConfirmDelete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            machineDatabase.machineDao().deleteMachineDataById(tv_detail_id.getText().toString());
+                            Toast.makeText(MachineDataDetailActivity.this, "Your data have been deleted!", Toast.LENGTH_SHORT).show();
+                            final Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    startActivity(new Intent(MachineDataDetailActivity.this, MachineDataActivity.class));
+                                }
+                            }, 1500);
+                        }
+                    });
+
+                    dialogDeleteWarning.setCancelable(false);
+                    dialogDeleteWarning.setCanceledOnTouchOutside(false);
+                    Objects.requireNonNull(dialogDeleteWarning.getWindow())
+                            .setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialogDeleteWarning.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                    dialogDeleteWarning.show();
+                }
+                else if (isFinishing()) {
+                    dialogDeleteWarning.dismiss();
+                }
                 break;
 
             case R.id.btnBack:
