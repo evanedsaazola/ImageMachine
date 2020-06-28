@@ -13,8 +13,6 @@ import android.app.Dialog;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -22,36 +20,26 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 import io.prospace.submissions.imagemachine.R;
 import io.prospace.submissions.imagemachine.adapter.MachineImageAdapter;
 import io.prospace.submissions.imagemachine.databases.MachineDatabase;
-import io.prospace.submissions.imagemachine.databases.MachineImageDatabaseHelper;
 import io.prospace.submissions.imagemachine.datamodel.MachineDataModel;
 import io.prospace.submissions.imagemachine.datamodel.MachineImageDataModel;
 import io.prospace.submissions.imagemachine.interfaces.ImageClickCallback;
 
 public class MachineDataDetailActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private MachineImageAdapter machineImageAdapter;
-    private ArrayList<MachineImageDataModel> machineImageArrayList = new ArrayList<>();
-
-    public static MachineImageDatabaseHelper machineImageDatabaseHelper;
 
     private List<MachineDataModel> machineDataArrayList = new ArrayList<>();
     private MachineDatabase machineDatabase;
@@ -62,9 +50,7 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
     public static final String MACHINE_ID_EXTRA = "machine_id";
     public static final String MACHINE_QR_CODE_EXTRA = "machine_qr_code";
     private String machineId, machineQrCode;
-    private boolean checked = false;
-
-//    ArrayList<Integer> imageId = new ArrayList<>();
+//    private boolean checked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +67,10 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
         tv_detail_type = findViewById(R.id.tvMachineDetailType);
         tv_detail_qr_code = findViewById(R.id.tvMachineDetailQrCodeNum);
         tv_detail_date = findViewById(R.id.tvMachineDetailMaintenanceDate);
-        FloatingActionButton fab_delete_images = findViewById(R.id.fabDeleteItems);
 
         btn_detail_add_images.setOnClickListener(this);
         btn_detail_delete_data.setOnClickListener(this);
         btn_back.setOnClickListener(this);
-        fab_delete_images.setOnClickListener(this);
 
         /*
         Retrieve the parameter that needed to show the data, is it from ID or from QR Code and
@@ -95,37 +79,14 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
         machineId = getIntent().getStringExtra(MACHINE_ID_EXTRA);
         machineQrCode = getIntent().getStringExtra(MACHINE_QR_CODE_EXTRA);
         initializeDatabase();
+
         if (machineId != null) {
             showDataFromId();
         }
         else if (machineQrCode != null) {
             showDataFromQrCode();
         }
-
-        // Create SQLite Database for machine images
-        machineImageDatabaseHelper = new MachineImageDatabaseHelper
-                (this, "IMAGESDB.sqlite", null, 1);
-        machineImageDatabaseHelper.queryData
-                ("CREATE TABLE IF NOT EXISTS IMAGES(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, image BLOB)");
-
-        // Get the images if there are images stored in certain item.
-        Cursor cursor = getData();
-        machineImageArrayList.clear();
-        while (cursor.moveToNext()) {
-            int id = cursor.getInt(0);
-            String name = cursor.getString(1);
-            byte[] image = cursor.getBlob(2);
-            Log.d("DataCheck", "Check>> " + name);
-            Log.d("DataCheck", "Check>> " + Arrays.toString(image));
-            machineImageArrayList.add(new MachineImageDataModel(id, name, image, checked));
-        }
-        machineImageAdapter = new MachineImageAdapter(machineImageArrayList, this, imageClickCallback);
-
-        rv_machine_image.setHasFixedSize(true);
-        rv_machine_image.setLayoutManager(new GridLayoutManager(this, 2));
-        rv_machine_image.setAdapter(machineImageAdapter);
-        machineImageAdapter.notifyDataSetChanged();
-
+        showImagesFromId();
     }
 
     private void initializeDatabase() {
@@ -230,17 +191,6 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
             case R.id.btnBack:
                 finish();
                 break;
-//
-//            case R.id.fabDeleteItems:
-//                Cursor cursor = machineImageDatabaseHelper.getQuery("SELECT id FROM IMAGES");
-//
-//                while (cursor.moveToNext()) {
-//                    imageId.add(cursor.getInt(idX));
-//
-//                }
-//                deleteImages(imageId.get(idX));
-//
-//                break;
         }
     }
 
@@ -259,7 +209,8 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
                     Intent test = new Intent();
                     setResult(Activity.RESULT_CANCELED, test);
                 }
-                // Convert image from gallery and decode it to bitmap and convert it again into byte.
+                // Convert image from gallery and decode it to bitmap and convert it again into
+                // byte and also input it to the insert DAO.
                 else {
                     for (int i = 0; i < clipData.getItemCount(); i++) {
                         Uri imageUri = clipData.getItemAt(i).getUri();
@@ -267,9 +218,9 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
                             InputStream inputStream = getContentResolver().openInputStream(imageUri);
                             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
 
-                            machineImageDatabaseHelper.insertMachineImages(
-                                    tv_detail_name.getText().toString(),
-                                    convertToBytes(bitmap));
+                            MachineImageDataModel machineImages = new MachineImageDataModel
+                                    (convertToBytes(bitmap), tv_detail_id.getText().toString(), false);
+                            machineDatabase.machineDao().insertMachineImageData(machineImages);
                         }
                         catch (IOException e) {
                             e.printStackTrace();
@@ -285,32 +236,27 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
                     InputStream inputStream = getContentResolver().openInputStream(imageUri);
                     Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
 
-                    machineImageDatabaseHelper.insertMachineImages(
-                            tv_detail_name.getText().toString(),
-                            convertToBytes(bitmap));
+                    MachineImageDataModel machineImages = new MachineImageDataModel
+                            (convertToBytes(bitmap), tv_detail_id.getText().toString(), false);
+                    machineDatabase.machineDao().insertMachineImageData(machineImages);
                 }
                 catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-
-            // Get the images if there are images stored and display it into recyclerview.
-            Cursor cursor = getData();
-            machineImageArrayList.clear();
-            while (cursor.moveToNext()) {
-                int id = cursor.getInt(0);
-                String name = cursor.getString(1);
-                byte[] image = cursor.getBlob(2);
-                Log.d("DataCheck", "Check>> " + name);
-                Log.d("DataCheck", "Check>> " + Arrays.toString(image));
-                machineImageArrayList.add(new MachineImageDataModel(id, name, image, checked));
-            }
-            machineImageAdapter = new MachineImageAdapter(machineImageArrayList, this, imageClickCallback);
-            rv_machine_image.setHasFixedSize(true);
-            rv_machine_image.setLayoutManager(new GridLayoutManager(this, 2));
-            rv_machine_image.setAdapter(machineImageAdapter);
-            machineImageAdapter.notifyDataSetChanged();
+            showImagesFromId();
         }
+    }
+
+    // get image data from database by machine ID and display it into RecyclerView.
+    private void showImagesFromId() {
+        List<MachineImageDataModel> machineImageArrayList = machineDatabase.machineDao().getMachineImagesById(machineId);
+
+        MachineImageAdapter machineImageAdapter = new MachineImageAdapter(machineImageArrayList, this, imageClickCallback);
+        rv_machine_image.setHasFixedSize(true);
+        rv_machine_image.setLayoutManager(new GridLayoutManager(this, 2));
+        rv_machine_image.setAdapter(machineImageAdapter);
+        machineImageAdapter.notifyDataSetChanged();
     }
 
     private static byte[] convertToBytes(Bitmap bitmap) {
@@ -318,35 +264,6 @@ public class MachineDataDetailActivity extends AppCompatActivity implements View
         bitmap.compress(Bitmap.CompressFormat.JPEG, 30 ,byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
-
-    // SQLite query to read the database data based on machine name.
-    private Cursor getData() {
-        SQLiteDatabase sqLiteDatabase = machineImageDatabaseHelper.getReadableDatabase();
-        return sqLiteDatabase.rawQuery("SELECT * FROM IMAGES WHERE name = ?", new String[]{tv_detail_name.getText().toString()});
-    }
-
-//    private void deleteImages(final int idImages) {
-//        machineImageDatabaseHelper.deleteMachineImages(idImages);
-//        updateImagesList();
-//    }
-//
-//    private void updateImagesList() {
-//        Cursor cursor = getData();
-//        machineImageArrayList.clear();
-//        while (cursor.moveToNext()) {
-//            int id = cursor.getInt(0);
-//            String name = cursor.getString(1);
-//            byte[] image = cursor.getBlob(2);
-//            Log.d("DataCheck", "CheckAfter>> " + name);
-//            Log.d("DataCheck", "CheckAfter>> " + image);
-//            machineImageArrayList.add(new MachineImageDataModel(id, name, image, checked));
-//        }
-//        machineImageAdapter = new MachineImageAdapter(machineImageArrayList, this, imageClickCallback);
-//        rv_machine_image.setHasFixedSize(true);
-//        rv_machine_image.setLayoutManager(new GridLayoutManager(this, 2));
-//        rv_machine_image.setAdapter(machineImageAdapter);
-//        machineImageAdapter.notifyDataSetChanged();
-//    }
 
     // Get image byte and send it to another activity to be viewed fullscreen
     private ImageClickCallback imageClickCallback = new ImageClickCallback() {
